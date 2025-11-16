@@ -6,9 +6,6 @@ import org.springframework.stereotype.Service;
 import com.system.employ.system_employ.model.Empleado;
 import com.system.employ.system_employ.repository.EmpleadoRepository;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-
 @Service("empleadoService")
 public class EmpleadoServiceImpl implements EmpleadoService {
 
@@ -17,9 +14,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 
     @Override
     public List<Empleado> listarTodos() {
-        List<Empleado> lista = empleadoRepository.findAll();
-        System.out.println("Empleados cargados: " + lista.size());
-        return lista;
+        return empleadoRepository.findAll();
     }
 
     @Override
@@ -41,16 +36,4 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     public void eliminar(Long id) {
         empleadoRepository.deleteById(id);
     }
-
-    public void probarConexion() {
-    try (Connection con = DriverManager.getConnection(
-        "jdbc:mysql://localhost:3306/proyecto_integracioncontinua?useSSL=false&serverTimezone=UTC",
-        "root",
-        "root")) {
-        System.out.println("✅ Conexión exitosa a la base de datos!");
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
 }
-}
-

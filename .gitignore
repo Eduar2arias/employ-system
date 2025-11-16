@@ -1,0 +1,24 @@
+# Backend (Java / Maven)
+target/
+*.log
+*.tmp
+*.class
+*.jar
+*.war
+*.iml
+*.idea/
+.DS_Store
+
+# Node / React
+frontend/node_modules/
+frontend/build/
+frontend/.env
+frontend/.DS_Store
+
+# Docker
+docker-compose.override.yml
+*.env
+
+# OS / IDEs
+.vscode/
+*.swp
