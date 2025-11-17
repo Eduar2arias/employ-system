@@ -47,24 +47,16 @@ services:
       - backend
 
   jenkins:
-      image: jenkins/jenkins:lts
+      build: ./jenkins
+      # image: jenkins/jenkins:lts
       container_name: ci_jenkins
       user: root
       ports:
         - "9090:8080"
-        - "50000 :50000"
+        - "50000:50000"
       volumes:
         - jenkins_home:/var/jenkins_home
         - /var/run/docker.sock:/var/run/docker.sock
-        - /usr/bin/docker:/usr/bin/docker  # Para ejecutar docker dentro del contenedor
-        - /usr/libexec/docker:/usr/libexec/docker  # Librerías de Docker
-      command: >
-            bash -c "
-            apt-get update &&
-            apt-get install -y docker-compose-plugin &&
-            chmod 666 /var/run/docker.sock &&
-            /usr/local/bin/jenkins.sh
-            "
       environment:
         DOCKER_HOST: "unix:///var/run/docker.sock"
 volumes:
