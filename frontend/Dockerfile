@@ -9,7 +9,8 @@ RUN npm install
 COPY . .
 
 # Exponer puerto Vite
-EXPOSE 5173
+# EXPOSE 5173
+EXPOSE 3001
 
 # Comando para dev server
 CMD ["npm", "run", "dev", "--", "--host"]
