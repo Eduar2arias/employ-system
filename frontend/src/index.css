@@ -1,0 +1,163 @@
+/* Fuente suave y moderna */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #fff8f2;
+    color: #4b4b4b;
+    line-height: 1.6;
+}
+
+/* Contenedor principal */
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #ffffffcc;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* Título */
+h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: #ff7f50; /* Coral pastel */
+    margin-bottom: 30px;
+}
+
+/* Botones */
+button {
+    cursor: pointer;
+    border: none;
+    font-weight: 600;
+    padding: 10px 18px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+/* Botón principal (Agregar / Guardar) */
+.btn-primary {
+    background: linear-gradient(90deg, #ff9a9e, #fad0c4);
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(255, 122, 122, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(255, 122, 122, 0.4);
+}
+
+/* Botón de eliminar */
+.btn-danger {
+    background: linear-gradient(90deg, #fbc2eb, #a6c1ee);
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(196, 123, 255, 0.3);
+}
+
+.btn-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(196, 123, 255, 0.4);
+}
+
+/* Botón de editar */
+.btn-edit {
+    background: linear-gradient(90deg, #a1c4fd, #c2e9fb);
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(123, 196, 255, 0.3);
+}
+
+.btn-edit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(123, 196, 255, 0.4);
+}
+
+/* Tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 20px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+}
+
+thead {
+    background: #ffe5d9;
+}
+
+thead th {
+    padding: 14px;
+    text-align: left;
+    color: #ff6f61;
+    font-weight: 600;
+}
+
+tbody td {
+    padding: 12px;
+    border-bottom: 1px solid #ffe5d9;
+}
+
+tbody tr:nth-child(even) {
+    background: #fff2f0;
+}
+
+tbody tr:hover {
+    background: #ffe5d9cc;
+}
+
+/* Formulario */
+form {
+    background: #fff0f5;
+    padding: 20px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+}
+
+form input {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 12px;
+    border-radius: 12px;
+    border: 1px solid #ffd6da;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+form input:focus {
+    border-color: #ff7f50;
+    outline: none;
+    box-shadow: 0 4px 10px rgba(255,127,80,0.2);
+}
+
+/* Navbar */
+nav {
+    background: #ffd6da;
+    padding: 12px 24px;
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    font-weight: 600;
+}
+
+nav h2 {
+    color: #ff6f61;
+    margin: 0;
+}
+
+/* Botón nuevo empleado */
+.new-employee-btn {
+    display: inline-block;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    table, form input, button {
+        font-size: 13px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+}
