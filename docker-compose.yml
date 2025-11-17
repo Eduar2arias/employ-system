@@ -12,6 +12,7 @@ services:
       MYSQL_DATABASE: proyecto_integracioncontinua
     volumes:
       - mysql_data:/var/lib/mysql
+      - ./db:/docker-entrypoint-initdb.d
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 5s
@@ -36,6 +37,12 @@ services:
     container_name: react_app
     ports:
       - "5173:5173"
+    command: npm run dev -- --host
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
     depends_on:
       - backend
 
