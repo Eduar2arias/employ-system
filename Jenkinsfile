@@ -9,7 +9,7 @@ pipeline {
 
         stage('Construir imágenes') {
             steps {
-                sh 'docker compose build'
+                sh 'docker-compose build'
             }
         }
 
@@ -33,7 +33,7 @@ pipeline {
 
         stage('Desplegar') {
             steps {
-                sh 'docker compose up -d'
+                sh 'docker-compose up -d'
             }
         }
     }
