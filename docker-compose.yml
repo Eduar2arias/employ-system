@@ -23,7 +23,7 @@ services:
     build: ./backend
     # container_name: spring_app
     ports:
-      - "8080:8080"
+      - "3000:8080"
     depends_on:
       mysql:
         condition: service_healthy
@@ -52,7 +52,7 @@ services:
       # container_name: ci_jenkins
       user: root
       ports:
-        - "9090:8080"
+        - "8080:8080"
         - "50000:50000"
       volumes:
         - jenkins_home:/var/jenkins_home
