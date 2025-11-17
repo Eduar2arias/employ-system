@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // const API_URL = "/api/empleados"; // proxy en vite.config.js
-const API_URL = "http://localhost:3000/api/empleados"; // proxy en vite.config.js
+const API_URL = "http://localhost:5000/api/empleados"; // proxy en vite.config.js
  
 export const getEmployees = () => axios.get(API_URL);
 export const createEmployee = (employee) => axios.post(API_URL, employee);
