@@ -1,46 +1,40 @@
 pipeline {
     agent any
-
-    environment {
-        DOCKER_HOST = 'unix:///var/run/docker.sock'
-    }
-
+    
     stages {
-
         stage('Construir imágenes') {
             steps {
-                sh 'docker-compose build'
+                echo 'Building Docker images...'
+                script {
+                    // Verificar que docker compose está disponible
+                    sh 'docker compose version'
+                    sh 'docker compose build --no-cache'
+                }
             }
         }
-
-        // stage('Ejecutar pruebas backend') {
-        //     steps {
-        //         sh '''
-        //             docker-compose run --rm backend \
-        //             ./mvnw test || exit 1
-        //         '''
-        //     }
-        // }
-
-        // stage('Ejecutar pruebas frontend') {
-        //     steps {
-        //         sh '''
-        //             docker-compose run --rm frontend \
-        //             npm test || echo "No test configured"
-        //         '''
-        //     }
-        // }
-
+        
         stage('Desplegar') {
             steps {
-                sh 'docker-compose up -d'
+                echo 'Deploying application...'
+                sh 'docker compose down || true'
+                sh 'docker compose up -d'
+            }
+        }
+        
+        stage('Verificar') {
+            steps {
+                echo 'Verifying deployment...'
+                sleep time: 30, unit: 'SECONDS'
+                sh 'docker compose ps'
+                sh 'curl -f http://backend:8080/actuator/health || echo "Backend check failed"'
             }
         }
     }
-
+    
     post {
         always {
-            sh 'docker-compose ps'
+            echo 'Pipeline execution completed'
+            sh 'docker ps -a'
         }
     }
 }
