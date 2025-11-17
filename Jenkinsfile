@@ -6,18 +6,18 @@ pipeline {
     }
 
     stages {
-
-        stage('Construir imágenes') {
+        stage('Build images') {
             steps {
                 sh 'docker compose build'
             }
         }
 
-
-        stage('Desplegar') {
+        stage('Deploy') {
             steps {
-                // sh 'docker compose up -d'
-                sh 'docker compose up -d mysql backend frontend'
+                sh '''
+                    docker compose down || true
+                    docker compose up -d mysql backend frontend
+                '''
             }
         }
     }
