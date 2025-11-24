@@ -6,7 +6,7 @@ services:
     # container_name: mysql_db
     restart: always
     ports:
-      - "3310:3306"
+      - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: proyecto_integracioncontinua
@@ -31,6 +31,21 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/proyecto_integracioncontinua?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
+      
+  tests:
+    image: maven:3.9.6-eclipse-temurin-21
+    container_name: test-runner
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/proyecto_integracioncontinua?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    entrypoint: [ "tail", "-f", "/dev/null" ]
 
   frontend:
     build: ./frontend

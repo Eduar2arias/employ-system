@@ -1,4 +1,4 @@
-package com.system.employ.system_employ.config;
+package com.system.employ.system_employ.service;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
