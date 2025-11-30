@@ -12,13 +12,34 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+        stage('Start services') {
             steps {
-                sh '''
-                    docker compose down || true
-                    docker compose up -d mysql backend frontend
-                '''
+                sh 'docker compose up -d mysql backend tests'
             }
+        }
+
+        stage('Run tests') {
+            steps {
+                sh 'docker exec -it test-runner mvn test'
+            }
+        }
+
+        stage('Generate coverage') {
+            steps {
+                sh 'docker exec -it test-runner mvn jacoco:report'
+            }
+        }
+
+        stage('Deploy frontend') {
+            steps {
+                sh 'docker compose up -d frontend'
+            }
+        }
+    }
+
+    post {
+        always {
+            sh 'docker compose down'
         }
     }
 
