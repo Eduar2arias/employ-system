@@ -20,13 +20,13 @@ pipeline {
 
         stage('Run tests') {
             steps {
-                sh 'docker exec -it test-runner mvn test'
+                sh 'docker exec test-runner mvn test'
             }
         }
 
         stage('Generate coverage') {
             steps {
-                sh 'docker exec -it test-runner mvn jacoco:report'
+                sh 'docker exec test-runner mvn jacoco:report'
             }
         }
 
