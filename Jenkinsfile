@@ -30,16 +30,14 @@ pipeline {
         }
 
         stage('Generate coverage') {
-            steps {
-           
-                sh 'docker exec test-runner mvn -f /app/pom.xml jacoco:report-xml'
-            }
+        steps {
+            sh 'docker exec test-runner mvn -f /app/pom.xml jacoco:report'
         }
+    }
 
         stage('Publish coverage') {
             steps {
-                publishCoverage adapters: [jacocoAdapter('backend/target/site/jacoco/jacoco.xml')], 
-                                sourceFileResolver: sourceFiles('NEVER_STORE')
+                publishCoverage adapters: [jacocoAdapter('backend/target/site/jacoco/jacoco.xml')]
             }
         }
 
