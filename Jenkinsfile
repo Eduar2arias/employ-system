@@ -24,20 +24,29 @@ pipeline {
 
         stage('Run tests') {
             steps {
-
+                // Ejecuta los tests
                 sh 'docker exec test-runner mvn -f /app/pom.xml test'
             }
         }
 
         stage('Generate coverage') {
-        steps {
-            sh 'docker exec test-runner mvn -f /app/pom.xml jacoco:report'
+            steps {
+                // Genera el reporte de JaCoCo dentro del contenedor
+                sh 'docker exec test-runner mvn -f /app/pom.xml jacoco:report'
+
+                // Copia los reportes al workspace de Jenkins
+                sh 'docker cp test-runner:/app/target/site/jacoco .'
+            }
         }
-    }
 
         stage('Publish coverage') {
             steps {
-                publishCoverage adapters: [jacocoAdapter('backend/target/site/jacoco/jacoco.xml')]
+                // Publica el HTML generado con el plugin HTML Publisher
+                publishHTML(target: [
+                    reportDir: 'jacoco',
+                    reportFiles: 'index.html',
+                    reportName: 'Coverage Report'
+                ])
             }
         }
 
