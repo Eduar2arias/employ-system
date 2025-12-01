@@ -37,7 +37,7 @@ services:
     container_name: test-runner
     working_dir: /app
     volumes:
-      - /var/jenkins_home/workspace/Pipeline-Test-Backend/backend:/app
+      - F:/PROYECTOS/employ-system/backend:/app
     depends_on:
       mysql:
         condition: service_healthy

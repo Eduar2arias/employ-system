@@ -24,13 +24,13 @@ pipeline {
 
         stage('Run tests') {
             steps {
-                sh "docker exec test-runner mvn -f /app/pom.xml test"
+                sh 'docker exec test-runner mvn -f /app/pom.xml test'
             }
         }
 
         stage('Generate coverage') {
             steps {
-                sh "docker exec test-runner mvn -f /app/pom.xml jacoco:report"
+                sh 'docker exec test-runner mvn -f /app/pom.xml jacoco:report'
             }
         }
 
@@ -47,12 +47,4 @@ pipeline {
             sh 'docker compose ps'
         }
     }
-
-
-   /* post {
-        always {
-            sh 'docker compose ps'
-        }
-    }
-    */
 }
