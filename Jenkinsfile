@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         DOCKER_HOST = 'unix:///var/run/docker.sock'
+        WORKSPACE_DIR = '/var/jenkins_home/workspace/Pipeline-Test-Backend'
     }
 
     stages {
@@ -12,21 +13,24 @@ pipeline {
             }
         }
 
-        stage('Start services') {
+        stage('Deploy services') {
             steps {
-                sh 'docker compose up -d mysql backend tests'
+                sh '''
+                    docker compose down || true
+                    docker compose up -d mysql backend tests
+                '''
             }
         }
 
         stage('Run tests') {
             steps {
-                sh 'docker exec test-runner mvn test'
+                sh "docker exec test-runner mvn -f /app/pom.xml test"
             }
         }
 
         stage('Generate coverage') {
             steps {
-                sh 'docker exec test-runner mvn jacoco:report'
+                sh "docker exec test-runner mvn -f /app/pom.xml jacoco:report"
             }
         }
 
@@ -40,8 +44,10 @@ pipeline {
     post {
         always {
             sh 'docker compose down'
+            sh 'docker compose ps'
         }
     }
+
 
    /* post {
         always {
